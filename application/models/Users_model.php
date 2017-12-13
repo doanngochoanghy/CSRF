@@ -20,6 +20,12 @@ class Users_model extends CI_Model {
 		$this->db->flush_cache();	
 		return $this->db->insert('users', $data);
 	}
+	public function change_password($user_id,$password)
+	{
+		$this->db->flush_cache();
+		$this->db->where('user_id', $user_id);
+		$this->db->update('users', array("password"=>$password));
+	}
 }
 	/* End of file Users_model.php */
 /* Location: ./application/models/Users_model.php */

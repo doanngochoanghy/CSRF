@@ -66,6 +66,29 @@ class Users extends CI_Controller {
 			redirect(base_url()."Users/login",'');
 		}
 	}
+	public function change_password()
+	{
+		if (!$this->session->userdata('loggedin')) {
+			redirect('Users/Login');
+		}
+		else
+		{
+			$this->form_validation->set_rules('new_password', 'New Password', 'required');
+			$this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[new_password]');
+			if ($this->form_validation->run() == FALSE) {
+				$this->load->view('templates/header');
+				$this->load->view('Users/change_password');
+				$this->load->view('templates/footer');
+			}
+			else
+			{
+				$new_password=md5($this->input->post("new_password"));
+				$this->users_model->change_password($this->session->userdata('user_id'),$new_password);
+				$this->session->set_flashdata('message', 'Password changed!');
+				redirect('');
+			}
+		}
+	}
 
 }
 
