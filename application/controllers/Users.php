@@ -75,7 +75,7 @@ class Users extends CI_Controller {
 		{
 			$this->form_validation->set_rules('new_password', 'New Password', 'required');
 			$this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[new_password]');
-			if ($this->form_validation->run() == FALSE) {
+			if (empty($this->input->post())) {
 				$this->load->view('templates/header');
 				$this->load->view('Users/change_password');
 				$this->load->view('templates/footer');
