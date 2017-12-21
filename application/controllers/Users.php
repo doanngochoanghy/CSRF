@@ -14,6 +14,7 @@ class Users extends CI_Controller {
 	}
 	public function login()
 	{
+		// $this->session->sess_destroy();
 		if ($this->session->userdata('loggedin')) {
 			redirect(base_url(),'')	;
 		}
@@ -82,10 +83,16 @@ class Users extends CI_Controller {
 			}
 			else
 			{
-				$new_password=md5($this->input->post("new_password"));
+				if ($this->input->post("new_password")==$this->input->post("confirm_password")) {
+					$new_password=md5($this->input->post("new_password"));
 				$this->users_model->change_password($this->session->userdata('user_id'),$new_password);
 				$this->session->set_flashdata('message', 'Password changed!');
 				redirect('');
+				} else {
+					redirect("");
+				}
+				
+				
 			}
 		}
 	}
